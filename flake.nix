@@ -197,8 +197,47 @@
         inherit system;
         project = defineProject mdrnTestsDefinition;
       };
+
+      # LIBRARIES
+
+      defineLibraryProject =
+        { groupName
+        , projectName
+        , buildDir
+        , buildArtifactsDir
+        , srcPath
+        , haskellDependencies ? (availableDependencies: [ ])
+        , localDependencies ? { }
+        , languageExtensions ? [ ]
+        , ...
+        }:
+        haskellProject.lib.defineProject
+          {
+            inherit groupName projectName buildDir buildArtifactsDir haskellDependencies localDependencies languageExtensions;
+            srcDir = "";
+          } // {
+          inherit srcPath;
+        };
+
+      defineMDRNProject =
+        { buildDir
+        , buildArtifactsDir
+        , groupName ? "realfolk"
+        , projectName ? "haskell-mdrn"
+        , ...
+        }:
+        defineLibraryProject
+          {
+            inherit groupName projectName buildDir buildArtifactsDir haskellDependencies;
+            srcPath = "${self}/src/mdrn/lib";
+            localDependencies = mdrnLibDefinition.localDependencies;
+          };
     in
     {
+      lib = {
+        inherit defineMDRNProject;
+      };
+
       packages = {
         inherit ghc;
         neovim = neovim.packages.${system}.default;
