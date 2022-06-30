@@ -10,6 +10,7 @@
     commonProject.url = "github:realfolk/nix?dir=lib/projects/common";
     projectLib.url = "github:realfolk/nix?dir=lib/projects/lib";
     haskellLib.url = "github:realfolk/haskell-lib/eecfeab6ae55b91480bd74fe831159318bcc9e26";
+    haskellLogger.url = "github:realfolk/haskell-logger/ed63934e57988fdccf9dd5ad5bad9f29cdbb68e2";
   };
 
   outputs =
@@ -24,6 +25,7 @@
     , commonProject
     , projectLib
     , haskellLib
+    , haskellLogger
     , ...
     }:
     flakeUtils.lib.eachDefaultSystem (system:
@@ -97,6 +99,11 @@
         buildArtifactsDir = config.buildArtifactsDir;
       };
 
+      haskellLoggerLibrary = haskellLogger.lib.${system}.defineLoggerProject {
+        buildDir = config.buildDir;
+        buildArtifactsDir = config.buildArtifactsDir;
+      };
+
       # PROJECTS
 
       mdrnLibDefinition = {
@@ -104,6 +111,7 @@
         projectName = "lib";
         localDependencies = [
           haskellLibLibrary
+          haskellLoggerLibrary
         ];
       };
 
@@ -123,6 +131,7 @@
         projectName = "repl";
         localDependencies = [
           haskellLibLibrary
+          haskellLoggerLibrary
           (defineHaskellProject mdrnLibDefinition)
         ];
         executables = {
@@ -146,6 +155,7 @@
         projectName = "benchmarks";
         localDependencies = [
           haskellLibLibrary
+          haskellLoggerLibrary
           (defineHaskellProject mdrnLibDefinition)
         ];
         executables = {
@@ -169,6 +179,7 @@
         projectName = "tests";
         localDependencies = [
           haskellLibLibrary
+          haskellLoggerLibrary
           (defineHaskellProject mdrnLibDefinition)
         ];
         executables = {
