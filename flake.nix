@@ -9,8 +9,8 @@
     haskellProject.url = "github:realfolk/nix?dir=lib/projects/haskell";
     commonProject.url = "github:realfolk/nix?dir=lib/projects/common";
     projectLib.url = "github:realfolk/nix?dir=lib/projects/lib";
-    haskellLib.url = "github:realfolk/haskell-lib/eecfeab6ae55b91480bd74fe831159318bcc9e26";
-    haskellLogger.url = "github:realfolk/haskell-logger/ed63934e57988fdccf9dd5ad5bad9f29cdbb68e2";
+    haskellLib.url = "github:realfolk/haskell-lib/cd08238d2dc7739d50c19bbdd72aef956a6fcc05";
+    haskellLogger.url = "github:realfolk/haskell-logger/280f406116f896f444cf4154ea1ce4256b2b0bb5";
   };
 
   outputs =
@@ -109,9 +109,11 @@
       mdrnLibDefinition = {
         groupName = "mdrn";
         projectName = "lib";
-        localDependencies = [
-          haskellLibLibrary
-          haskellLoggerLibrary
+        localDependencies = builtins.concatLists [
+          ([ haskellLibLibrary haskellLoggerLibrary ])
+          #TODO remove once automatically supported by realfolk/nix upstream
+          haskellLibLibrary.localDependencies
+          haskellLoggerLibrary.localDependencies
         ];
       };
 
@@ -129,10 +131,10 @@
       mdrnREPLDefinition = {
         groupName = "mdrn";
         projectName = "repl";
-        localDependencies = [
-          haskellLibLibrary
-          haskellLoggerLibrary
-          (defineHaskellProject mdrnLibDefinition)
+        localDependencies = builtins.concatLists [
+          [ (defineHaskellProject mdrnLibDefinition) ]
+          #TODO remove once automatically supported by realfolk/nix upstream
+          mdrnLibDefinition.localDependencies
         ];
         executables = {
           main = "Main.hs";
@@ -153,10 +155,10 @@
       mdrnBenchmarksDefinition = {
         groupName = "mdrn";
         projectName = "benchmarks";
-        localDependencies = [
-          haskellLibLibrary
-          haskellLoggerLibrary
-          (defineHaskellProject mdrnLibDefinition)
+        localDependencies = builtins.concatLists [
+          [ (defineHaskellProject mdrnLibDefinition) ]
+          #TODO remove once automatically supported by realfolk/nix upstream
+          mdrnLibDefinition.localDependencies
         ];
         executables = {
           list-parser = "ListParser.hs";
@@ -177,10 +179,10 @@
       mdrnTestsDefinition = {
         groupName = "mdrn";
         projectName = "tests";
-        localDependencies = [
-          haskellLibLibrary
-          haskellLoggerLibrary
-          (defineHaskellProject mdrnLibDefinition)
+        localDependencies = builtins.concatLists [
+          [ (defineHaskellProject mdrnLibDefinition) ]
+          #TODO remove once automatically supported by realfolk/nix upstream
+          mdrnLibDefinition.localDependencies
         ];
         executables = {
           test = "Spec.hs";

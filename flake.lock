@@ -1385,17 +1385,17 @@
         "rnixLsp": "rnixLsp"
       },
       "locked": {
-        "lastModified": 1656554582,
-        "narHash": "sha256-/CrYszW5z4HFqPQX+XbB8AGprSRMhI0YCe0s1xYIryU=",
+        "lastModified": 1656556471,
+        "narHash": "sha256-oGAQT1rCT2TLhL289cTHpSyEjuIW8OjrCG424Uxm0mg=",
         "owner": "realfolk",
         "repo": "haskell-lib",
-        "rev": "eecfeab6ae55b91480bd74fe831159318bcc9e26",
+        "rev": "cd08238d2dc7739d50c19bbdd72aef956a6fcc05",
         "type": "github"
       },
       "original": {
         "owner": "realfolk",
         "repo": "haskell-lib",
-        "rev": "eecfeab6ae55b91480bd74fe831159318bcc9e26",
+        "rev": "cd08238d2dc7739d50c19bbdd72aef956a6fcc05",
         "type": "github"
       }
     },
@@ -1412,17 +1412,17 @@
         "rnixLsp": "rnixLsp_2"
       },
       "locked": {
-        "lastModified": 1656554582,
-        "narHash": "sha256-/CrYszW5z4HFqPQX+XbB8AGprSRMhI0YCe0s1xYIryU=",
+        "lastModified": 1656556471,
+        "narHash": "sha256-oGAQT1rCT2TLhL289cTHpSyEjuIW8OjrCG424Uxm0mg=",
         "owner": "realfolk",
         "repo": "haskell-lib",
-        "rev": "eecfeab6ae55b91480bd74fe831159318bcc9e26",
+        "rev": "cd08238d2dc7739d50c19bbdd72aef956a6fcc05",
         "type": "github"
       },
       "original": {
         "owner": "realfolk",
         "repo": "haskell-lib",
-        "rev": "eecfeab6ae55b91480bd74fe831159318bcc9e26",
+        "rev": "cd08238d2dc7739d50c19bbdd72aef956a6fcc05",
         "type": "github"
       }
     },
@@ -1440,17 +1440,17 @@
         "rnixLsp": "rnixLsp_3"
       },
       "locked": {
-        "lastModified": 1656555397,
-        "narHash": "sha256-VW41aSfijyhX+N+ms6KQaw2A+xv15sqkUvIcwkwM7Cg=",
+        "lastModified": 1656556553,
+        "narHash": "sha256-XfIsv6FuAGQdz0Gvzqhu+yoEqzu6NWt4C0cUWbEBMeY=",
         "owner": "realfolk",
         "repo": "haskell-logger",
-        "rev": "ed63934e57988fdccf9dd5ad5bad9f29cdbb68e2",
+        "rev": "280f406116f896f444cf4154ea1ce4256b2b0bb5",
         "type": "github"
       },
       "original": {
         "owner": "realfolk",
         "repo": "haskell-logger",
-        "rev": "ed63934e57988fdccf9dd5ad5bad9f29cdbb68e2",
+        "rev": "280f406116f896f444cf4154ea1ce4256b2b0bb5",
         "type": "github"
       }
     },
