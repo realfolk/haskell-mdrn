@@ -9,7 +9,7 @@
     haskellProject.url = "github:realfolk/nix?dir=lib/projects/haskell";
     commonProject.url = "github:realfolk/nix?dir=lib/projects/common";
     projectLib.url = "github:realfolk/nix?dir=lib/projects/lib";
-    haskellLib.url = "github:realfolk/haskell-lib";
+    haskellLib.url = "github:realfolk/haskell-lib/eecfeab6ae55b91480bd74fe831159318bcc9e26";
   };
 
   outputs =

@@ -709,6 +709,7 @@
       "original": {
         "owner": "realfolk",
         "repo": "haskell-lib",
+        "rev": "eecfeab6ae55b91480bd74fe831159318bcc9e26",
         "type": "github"
       }
     },
