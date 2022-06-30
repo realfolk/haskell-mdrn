@@ -9,6 +9,7 @@
     haskellProject.url = "github:realfolk/nix?dir=lib/projects/haskell";
     commonProject.url = "github:realfolk/nix?dir=lib/projects/common";
     projectLib.url = "github:realfolk/nix?dir=lib/projects/lib";
+    haskellLib.url = "github:realfolk/haskell-lib";
   };
 
   outputs =
@@ -22,6 +23,7 @@
     , haskellProject
     , commonProject
     , projectLib
+    , haskellLib
     , ...
     }:
     flakeUtils.lib.eachDefaultSystem (system:
@@ -88,13 +90,20 @@
 
       ghc = haskellPkgs.ghcWithPackages haskellDependencies;
 
+      # UPSTREAM LIBRARIES
+
+      haskellLibLibrary = haskellLib.lib.${system}.defineLibProject {
+        buildDir = config.buildDir;
+        buildArtifactsDir = config.buildArtifactsDir;
+      };
+
       # PROJECTS
 
       mdrnLibDefinition = {
         groupName = "mdrn";
         projectName = "lib";
-        localDependencies = map defineHaskellProject [
-          #TODO
+        localDependencies = [
+          haskellLibLibrary
         ];
       };
 
@@ -112,12 +121,12 @@
       mdrnREPLDefinition = {
         groupName = "mdrn";
         projectName = "repl";
-        localDependencies = map defineHaskellProject [
-          #TODO
-          mdrnLibDefinition
+        localDependencies = [
+          haskellLibLibrary
+          (defineHaskellProject mdrnLibDefinition)
         ];
         executables = {
-          list-parser = "ListParser.hs";
+          main = "Main.hs";
         };
       };
 
@@ -135,9 +144,9 @@
       mdrnBenchmarksDefinition = {
         groupName = "mdrn";
         projectName = "benchmarks";
-        localDependencies = map defineHaskellProject [
-          #TODO
-          mdrnLibDefinition
+        localDependencies = [
+          haskellLibLibrary
+          (defineHaskellProject mdrnLibDefinition)
         ];
         executables = {
           list-parser = "ListParser.hs";
@@ -158,9 +167,9 @@
       mdrnTestsDefinition = {
         groupName = "mdrn";
         projectName = "tests";
-        localDependencies = map defineHaskellProject [
-          #TODO
-          mdrnLibDefinition
+        localDependencies = [
+          haskellLibLibrary
+          (defineHaskellProject mdrnLibDefinition)
         ];
         executables = {
           test = "Spec.hs";
