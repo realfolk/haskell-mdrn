@@ -10,7 +10,7 @@
     commonProject.url = "github:realfolk/nix?dir=lib/projects/common";
     projectLib.url = "github:realfolk/nix?dir=lib/projects/lib";
     haskellLib.url = "github:realfolk/haskell-lib/cd08238d2dc7739d50c19bbdd72aef956a6fcc05";
-    haskellLogger.url = "github:realfolk/haskell-logger/280f406116f896f444cf4154ea1ce4256b2b0bb5";
+    haskellLogger.url = "github:realfolk/haskell-logger/2ffa3d1e58cd52b1e3d59f3487acbab20fb6fcc2";
   };
 
   outputs =
@@ -209,7 +209,7 @@
         , buildArtifactsDir
         , srcPath
         , haskellDependencies ? (availableDependencies: [ ])
-        , localDependencies ? { }
+        , localDependencies ? [ ]
         , languageExtensions ? [ ]
         , ...
         }:

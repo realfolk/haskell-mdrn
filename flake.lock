@@ -1440,17 +1440,17 @@
         "rnixLsp": "rnixLsp_3"
       },
       "locked": {
-        "lastModified": 1656556553,
-        "narHash": "sha256-XfIsv6FuAGQdz0Gvzqhu+yoEqzu6NWt4C0cUWbEBMeY=",
+        "lastModified": 1656556982,
+        "narHash": "sha256-0JdIaBAQk9HomDhwrscJ0fe2I1UJVlNjMR8Nu2P98nI=",
         "owner": "realfolk",
         "repo": "haskell-logger",
-        "rev": "280f406116f896f444cf4154ea1ce4256b2b0bb5",
+        "rev": "2ffa3d1e58cd52b1e3d59f3487acbab20fb6fcc2",
         "type": "github"
       },
       "original": {
         "owner": "realfolk",
         "repo": "haskell-logger",
-        "rev": "280f406116f896f444cf4154ea1ce4256b2b0bb5",
+        "rev": "2ffa3d1e58cd52b1e3d59f3487acbab20fb6fcc2",
         "type": "github"
       }
     },
