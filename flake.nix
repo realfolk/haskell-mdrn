@@ -9,8 +9,8 @@
     haskellProject.url = "github:realfolk/nix?dir=lib/projects/haskell";
     commonProject.url = "github:realfolk/nix?dir=lib/projects/common";
     projectLib.url = "github:realfolk/nix?dir=lib/projects/lib";
-    haskellLib.url = "github:realfolk/haskell-lib/8db5a0efdc1f0e6ec8db623ecbbcafba8615fea9";
-    haskellLogger.url = "github:realfolk/haskell-logger/2cdacab1ecd62fa1052501b6d496c0e83f414414";
+    haskellLib.url = "github:realfolk/haskell-lib/a281eabe93085dc238109d3f20abe83cb30ca5a0";
+    haskellLogger.url = "github:realfolk/haskell-logger/120b5139ceadb53c80d639e7ddc91dff4abafbc3";
   };
 
   outputs =
@@ -109,11 +109,9 @@
       mdrnLibDefinition = {
         groupName = "mdrn";
         projectName = "lib";
-        localDependencies = builtins.concatLists [
-          ([ haskellLibLibrary haskellLoggerLibrary ])
-          #TODO remove once automatically supported by realfolk/nix upstream
-          haskellLibLibrary.localDependencies
-          haskellLoggerLibrary.localDependencies
+        localDependencies = [
+          haskellLibLibrary
+          haskellLoggerLibrary
         ];
       };
 
@@ -232,7 +230,6 @@
           {
             inherit groupName projectName buildDir buildArtifactsDir haskellDependencies;
             srcPath = "${self}/src/mdrn/lib";
-            localDependencies = mdrnLibDefinition.localDependencies;
           };
     in
     {
