@@ -4,9 +4,9 @@ module Test.MDRN.ParserSpec
     ( spec
     ) where
 
-import qualified Data.ByteString  as BS
-import           Data.Either      (isLeft)
-import           Lib.Rational     ((%))
+import qualified Data.ByteString   as BS
+import           Data.Either       (isLeft)
+import           Lib.Math.Rational ((%))
 import           MDRN.Data
 import           MDRN.Data.Parser
 import           Test.Hspec

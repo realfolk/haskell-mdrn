@@ -9,8 +9,8 @@
     haskellProject.url = "github:realfolk/nix?dir=lib/projects/haskell";
     commonProject.url = "github:realfolk/nix?dir=lib/projects/common";
     projectLib.url = "github:realfolk/nix?dir=lib/projects/lib";
-    haskellLib.url = "github:realfolk/haskell-lib/cd08238d2dc7739d50c19bbdd72aef956a6fcc05";
-    haskellLogger.url = "github:realfolk/haskell-logger/2ffa3d1e58cd52b1e3d59f3487acbab20fb6fcc2";
+    haskellLib.url = "github:realfolk/haskell-lib/8db5a0efdc1f0e6ec8db623ecbbcafba8615fea9";
+    haskellLogger.url = "github:realfolk/haskell-logger/2cdacab1ecd62fa1052501b6d496c0e83f414414";
   };
 
   outputs =

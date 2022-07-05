@@ -5,17 +5,17 @@ module MDRN.Data.Parser
     , validateData
     ) where
 
-import qualified Data.ByteString as BS
-import qualified Data.Char       as Char
-import           Data.Maybe      (fromJust)
-import qualified Data.Text       as T
+import qualified Data.ByteString   as BS
+import qualified Data.Char         as Char
+import           Data.Maybe        (fromJust)
+import qualified Data.Text         as T
 import qualified Lib
-import           Lib.Rational    (Rational, (%))
-import           MDRN.Data       (Data (..), Prim (..))
-import qualified MDRN.Data       as Data
-import           Numeric.Natural (Natural)
-import           Text.Parsec     ((<|>))
-import qualified Text.Parsec     as P
+import           Lib.Math.Rational (Rational, (%))
+import           MDRN.Data         (Data (..), Prim (..))
+import qualified MDRN.Data         as Data
+import           Numeric.Natural   (Natural)
+import qualified Text.Parsec       as P
+import           Text.Parsec       ((<|>))
 
 type Parser a = P.Parsec T.Text () a
 

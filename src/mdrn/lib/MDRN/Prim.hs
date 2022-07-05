@@ -8,7 +8,7 @@ module MDRN.Prim
 import qualified Data.Binary         as B
 import qualified Data.ByteString     as BS
 import qualified Data.Text           as T
-import qualified Lib.Rational        as Rational
+import qualified Lib.Math.Rational   as Rational
 import           Lib.Text            (tshow)
 import qualified Logger
 import qualified MDRN.Lib.ByteString as BS
