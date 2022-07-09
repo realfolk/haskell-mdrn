@@ -14,6 +14,7 @@ import qualified Data.Text.Encoding                as TE
 import           GHC.Exception.Type                (SomeException,
                                                     fromException)
 import qualified Lib.Time                          as Time
+import qualified Lib.URL.Component.Path            as Path
 import qualified Lib.UUID                          as UUID
 import           Logger                            (Logger)
 import qualified Logger                            as L
@@ -23,11 +24,11 @@ import           MDRN.Language.Expr                (Map)
 import qualified MDRN.Network.Client.Request       as ClientRequest
 import qualified MDRN.Network.Client.Response      as ClientResponse
 import qualified MDRN.Network.Server.Error         as SE
+import qualified MDRN.Network.Server.Handler       as Handler
 import qualified MDRN.Network.Server.HTTP.Request  as HTTPRequest
 import qualified MDRN.Network.Server.HTTP.Response as HTTPResponse
 import           MDRN.Network.Server.HTTP.Route    (Action (..), Route)
 import qualified MDRN.Network.Server.HTTP.Route    as Route
-import qualified MDRN.Network.Server.Handler       as Handler
 import qualified Network.HTTP.Types                as H
 import qualified Network.Wai                       as Wai
 import qualified Network.Wai.Handler.Warp          as Warp
@@ -123,7 +124,7 @@ logRequest logger logId (method, path, _, _, _) =
       record = L.delimitSpace
         [ L.leftArrow
         , L.boldText (L.Level L.Info) $ TE.decodeUtf8 method
-        , L.text ("/" <> T.intercalate "/" path)
+        , L.text $ Path.toText path
         ]
 
 logResponse :: L.Logger -> LogId -> HTTPResponse.Response -> Time.Time -> IO ()

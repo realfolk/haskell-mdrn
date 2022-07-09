@@ -45,6 +45,7 @@ import           Data.List                        (find, partition)
 import           Data.Maybe                       (isJust)
 import qualified Data.Text                        as T
 import qualified Data.Text.Encoding               as TE
+import qualified Lib.URL.Component.Path           as Path
 import qualified Lib.URL.Component.Query          as Query
 import           MDRN.Data                        (Data)
 import qualified MDRN.Data.Decode                 as Decode
@@ -95,9 +96,11 @@ pathEnd req@(_, [last], _, _, _)
 pathEnd _ = Nothing
 
 pathIs :: (T.Text -> Bool) -> Parser (T.Text -> a) a
-pathIs f (m, p:ps, q, h, b)
-  | f p = Just ((m, ps, q, h, b), \f -> f p)
-pathIs _ _ = Nothing
+pathIs f (m, p, q, h, b) = do
+  (nextPathSection, remainingPath) <- Path.uncons p
+  if f nextPathSection
+     then Just ((m, remainingPath, q, h, b), \f -> f nextPathSection)
+     else Nothing
 
 pathExact :: T.Text -> Parser a a
 pathExact t req = do
