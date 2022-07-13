@@ -6,7 +6,6 @@ module MDRN.Network.Server.HTTP
     , run
     ) where
 
-import           Control.Monad                     (when)
 import           Data.Bifunctor                    (bimap)
 import           Data.Maybe                        (fromMaybe)
 import qualified Data.Text                         as T
@@ -37,21 +36,19 @@ import           System.TimeManager                (TimeoutThread (TimeoutThread
 
 data Config
   = Config
-      { cRoutes         :: [Route]
+      { cRoutes       :: [Route]
         -- ^ The list of routes.
-      , cNotFound       :: HTTPRequest.Request -> Action
+      , cNotFound     :: HTTPRequest.Request -> Action
         -- ^ The response to use when a requested route is not found.
-      , cTLSSettings    :: Maybe WarpTLS.TLSSettings
+      , cTLSSettings  :: Maybe WarpTLS.TLSSettings
         -- ^ The TLS settings to use when running securely.
-      , cSettings       :: Maybe Warp.Settings
+      , cSettings     :: Maybe Warp.Settings
         -- ^ The Warp settings to use, if any.
-      , cMiddleware     :: Maybe Wai.Middleware
+      , cMiddleware   :: Maybe Wai.Middleware
         -- ^ The WAI middleware settings to use, if any.
-      , cLogger         :: Logger
+      , cLogger       :: Logger
         -- ^ The logger to use.
-      , cVerboseLogging :: Bool
-        -- ^ Whether or not to use verbose logging (will log every request).
-      , cDomainModule   :: Map
+      , cDomainModule :: Map
         -- ^ The domain module to use.
       }
 
@@ -67,7 +64,7 @@ run Config {..} =
         -- Determine log request ID
         requestLogId <- nextLogId
         -- Log incoming request
-        when cVerboseLogging $ logRequest cLogger requestLogId request
+        logRequest cLogger requestLogId request
         -- Compute response based on server configuration
         response <- case Route.find request cRoutes of
           Just action -> processAction action
@@ -77,7 +74,7 @@ run Config {..} =
         -- Track request end time
         end <- Time.now
         let elapsed = end - start
-        when cVerboseLogging $ logResponse cLogger requestLogId response elapsed
+        logResponse cLogger requestLogId response elapsed
         -- Return correct value for WAI
         return responseSent
   where
@@ -119,7 +116,7 @@ logIdToText = UUID.encodeBase64TextStrict
 
 logRequest :: L.Logger -> LogId -> HTTPRequest.Request -> IO ()
 logRequest logger logId (method, path, _, _, _) =
-  writeRecord (logger L.Info) logId record
+  writeRecord (logger L.Debug) logId record
     where
       record = L.delimitSpace
         [ L.leftArrow
@@ -129,7 +126,7 @@ logRequest logger logId (method, path, _, _, _) =
 
 logResponse :: L.Logger -> LogId -> HTTPResponse.Response -> Time.Time -> IO ()
 logResponse logger logId (H.Status code _, _, _) elapsed =
-  writeRecord (logger L.Info) logId record
+  writeRecord (logger L.Debug) logId record
     where
       record = L.delimitSpace
         [ L.rightArrow
